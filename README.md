@@ -1,7 +1,7 @@
 Scala2Json
 ==========
 
-A library that recursively encodes a Scala structure into Json, with various encoding options.
+A library that recursively encodes a Scala structure into Json, with various escaping options.
 ----------
 
 **Simple usage example**
@@ -15,6 +15,6 @@ A library that recursively encodes a Scala structure into Json, with various enc
 	val result = JSonUtils.encode(slashEscaper)(fullExample)
 	println(result)
 	
-*Output*
+*Output (this is a String)*
 
 	{"myKey1": [1,"justAstring",2.5,true,["recursion!"]],"myKey2": {"justAnotherKey": "justAnotherValue"}}
