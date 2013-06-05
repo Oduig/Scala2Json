@@ -18,5 +18,3 @@ A library that recursively encodes a Scala structure into Json, with various enc
 *Output*
 
 	{"myKey1": [1,"justAstring",2.5,true,["recursion!"]],"myKey2": {"justAnotherKey": "justAnotherValue"}}
-	{"myKey1": [1,"justAstring",2.5,true,["recursion!"]],"myKey2": {"justAnotherKey": "justAnotherValue"}}
-	{"myKey1": [1,"justAstring",2.5,true,["recursion!"]],"myKey2": {"justAnotherKey": "justAnotherValue"}}
