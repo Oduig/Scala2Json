@@ -12,7 +12,7 @@ A library that recursively encodes a Scala structure into Json, with various esc
 			"myKey2" -> Map("justAnotherKey" -> "justAnotherValue")
 		)
 		
-	val result = jsonUtils.encode(slashEscaper)(fullExample)
+	val result = jsonUtils.encode(slashEscaper)(minimalExample)
 	println(result)
 	
 **Output (this is a String)**
