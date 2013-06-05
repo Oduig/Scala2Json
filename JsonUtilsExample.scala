@@ -1,11 +1,11 @@
-import ScalaHelpers.jsonUtils
+package com.gjos.scalahelpers
 
 /*
  * Open source =)
  * June 5th, 2013
  * @author Guido Josquin
  */
-object main extends App {
+object main extends Application {
 	val fullExample = Map(
 		"myKey1" -> List(1, "justAstring", 2.5, true, List("recursion!")),
 		"myKey2" -> Map(

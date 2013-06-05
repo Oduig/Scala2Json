@@ -1,4 +1,4 @@
-package ScalaHelpers
+package com.gjos.scalahelpers
 
 /*
  * Open source =)
@@ -8,16 +8,16 @@ package ScalaHelpers
  * Encodes a Scala json-like object to a JSON string
  * Only the JS-compatible types are encoded; all others will become null.
  */
-object jsonUtils extends htmlEscaper{
+object jsonUtils {
 	type StringMap = Map[String, Any]
     
-	def encode(root: Any): String = root match {
-		case m: StringMap   => (for((k,v) <- m) yield ('\"' + escape(k) + '\"' + ": " + encode(v))).mkString("{", ",", "}")
-		case l: List[Any]   => l.map(encode(_)).mkString("[", ",", "]")
+	def encode(esc: Escaper = slashEscaper)(root: Any): String = root match {
+		case m: StringMap   => (for((k,v) <- m) yield ('\"' + esc.escape(k) + '\"' + ": " + encode(esc)(v))).mkString("{", ",", "}")
+		case l: List[Any]   => l.map(encode(esc)(_)).mkString("[", ",", "]")
 		case b: Boolean     => b.toString
 		case i: Int         => i.toString
 		case d: Double      => d.toString
-		case s: String      => '\"' + escape(s) + '\"'
+		case s: String      => '\"' + esc.escape(s) + '\"'
 		case _              => "null"
 	}
     
