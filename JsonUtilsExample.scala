@@ -2,7 +2,7 @@ import ScalaHelpers.jsonUtils
 
 /*
  * Open source =)
- * June 5th, 2014
+ * June 5th, 2013
  * @author Guido Josquin
  */
 object main extends App {

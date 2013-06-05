@@ -2,7 +2,7 @@ package ScalaHelpers
 
 /*
  * Open source =)
- * June 5th, 2014
+ * June 5th, 2013
  * @author Guido Josquin
  *
  * Offers various ways to escape a string.
