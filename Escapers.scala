@@ -15,7 +15,7 @@ trait Escaper {
 	def escape(in: String): String = {
 		def iter(s: List[Char], acc: List[Char]): List[Char] = s match {
 			case Nil  => acc
-			case c::xs => iter(xs, acc ++ charsToEscape.withDefaultValue(c.toString)(c))
+			case (c: Char)::xs => iter(xs, acc ++ charsToEscape.getOrElse(c, c.toString))
 		}
 		iter(in.toList, Nil).mkString("")
 	}
@@ -68,8 +68,15 @@ trait UnEscaper {
         val possibleMatch = partialMatch :+ ch
         // Check if the possibleMatch is a full match
         stringsToUnescape.get(possibleMatch.mkString) match{
-          // Check if the possibleMatch is a partial match. If so, continue with possibleMatch, otherwise, add it to the accumulator and start over with an empty match
-          case None          => if(stringsToUnescape.keySet.exists(_.startsWith(possibleMatch))) iter(xs, possibleMatch, acc) else iter(xs, Nil, acc ++ possibleMatch)
+          case None => {
+            // Check if the possibleMatch is a partial match. If so, continue with possibleMatch
+            val keys: Iterable[String] = stringsToUnescape.keys
+            if(keys.exists(_.startsWith(possibleMatch))) 
+              iter(xs, possibleMatch, acc) 
+            // Otherwise, add it to the accumulator and start over with an empty match
+            else 
+              iter(xs, Nil, acc ++ possibleMatch)
+          }
           // Add the value of the map to the accumulator and recurse
           case Some(c: Char) => iter(xs, Nil, acc :+ c)
         }
