@@ -1,4 +1,4 @@
-package com.gjos.scalahelpers
+package com.gjos.scala.json
 
 /*
  * Open source =)
