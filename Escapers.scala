@@ -9,7 +9,7 @@ package com.gjos.scala.json
  */ 
 trait Escaper {
 	// Abstract map from chars to replacement strings
-	protected val charsToEscape: Map[Char, String]	
+	protected val charsToEscape: Map[Char, String]
 	
 	// Generic escape method
 	def escape(in: String): String = {
@@ -19,41 +19,9 @@ trait Escaper {
 		}
 		iter(in.toList, Nil).mkString("")
 	}
-}
-
-object slashEscaper extends Escaper {
-  val charsToEscape = Map(
-    '\'' -> "\\\'",
-    '\"' -> "\\\"",
-    '\\' -> "\\\\"
-  )
-}
-
-object urlEscaper extends Escaper {
-  val charsToEscape = Map(
-    '\'' -> "%27",
-    '\"' -> "%22",
-    '\\' -> "%5C"
-  )
-}
-
-object htmlEscaper extends Escaper {
-  val charsToEscape = Map(
-    '\'' -> "&apos;",
-    '\"' -> "&quot;",
-    '&'  -> "&amp;",
-    '<'  -> "&lt;",
-    '>'  -> "&gt;",
-    '\\' -> "&#92;"
-  )
-}
-
-/*
- * Similar to Escaper, but in reverse
- */
-trait UnEscaper {
+	
   // Abstract map from strings to replacement chars
-  protected val stringsToUnescape: Map[String, Char]  
+  private lazy val stringsToUnescape: Map[String, Char] = charsToEscape.map(_.swap)
   
   // Generic escape method
   def unescape(in: String): String = {
@@ -86,29 +54,29 @@ trait UnEscaper {
   }
 }
 
-object slashUnEscaper extends UnEscaper {
-  val stringsToUnescape = Map(
-    "\\\'" -> '\'',
-    "\\\"" -> '\"',
-    "\\\\" -> '\\'
+object slashEscaper extends Escaper {
+  val charsToEscape = Map(
+    '\'' -> "\\\'",
+    '\"' -> "\\\"",
+    '\\' -> "\\\\"
   )
 }
 
-object urlUnEscaper extends UnEscaper {
-  val stringsToUnescape = Map(
-    "%27" -> '\'',
-    "%22" -> '\"',
-    "%5C" -> '\\'
+object urlEscaper extends Escaper {
+  val charsToEscape = Map(
+    '\'' -> "%27",
+    '\"' -> "%22",
+    '\\' -> "%5C"
   )
 }
 
-object htmlUnEscaper extends UnEscaper {
-  val stringsToUnescape = Map(
-    "&apos;" -> '\'',
-    "&quot;" -> '\"',
-    "&amp;"  -> '&',
-    "&lt;"   -> '<',
-    "&gt;"   -> '>',
-    "&#92;"  -> '\\'
-  )  
+object htmlEscaper extends Escaper {
+  val charsToEscape = Map(
+    '\'' -> "&apos;",
+    '\"' -> "&quot;",
+    '&'  -> "&amp;",
+    '<'  -> "&lt;",
+    '>'  -> "&gt;",
+    '\\' -> "&#92;"
+  )
 }
