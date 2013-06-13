@@ -6,7 +6,7 @@ A library that recursively encodes a Scala structure into Json, with various esc
 
 **Simple usage example**
 
-	import com.gjos.scalahelpers.jsonUtils
+	import com.gjos.scala.json.jsonUtils
 	val minimalExample = Map(
 			"myKey1" -> List(1, "justAstring", 2.5, true, List("recursion!")),
 			"myKey2" -> Map("justAnotherKey" -> "justAnotherValue")
